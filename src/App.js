@@ -32,11 +32,12 @@ function App() {
   const [slideTimer, setSlideTimer] = useState(null);
   const slideDuration = 3000;
 
-  // Update the active index for next/prev
+  // Update the active index for next
   const goToNextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % catalogs.length);
   };
 
+  // Update the active index for previous
   const goToPrevSlide = () => {
     setActiveIndex(
       (prevIndex) => (prevIndex - 1 + catalogs.length) % catalogs.length
@@ -71,7 +72,7 @@ function App() {
               >
                 <i className="material-icons">arrow_back</i>
               </button>
-              <Thumbs items={catalogs} currentIndex={activeIndex} />
+              <Thumbs items={catalogs} currentIndex={activeIndex} onThumbnailClick={setActiveIndex}/>
               <button
                 className="icon-only outlined"
                 data-testid="next-slide-btn"
