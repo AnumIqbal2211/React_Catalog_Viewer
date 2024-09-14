@@ -32,15 +32,29 @@ function App() {
   const [slideTimer, setSlideTimer] = useState(null);
   const slideDuration = 3000;
 
-  // Update the active index for next
+  // Update the active index for next/prev
   const goToNextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % catalogs.length);
   };
 
-  // Update teh active index for previous
   const goToPrevSlide = () => {
-    setActiveIndex((prevIndex) => (prevIndex -1 + catalogs.length) % catalogs.length)
+    setActiveIndex(
+      (prevIndex) => (prevIndex - 1 + catalogs.length) % catalogs.length
+    );
   };
+
+  // Handle slideshow start/stop
+  useEffect(() => {
+    if (slideShow) {
+      const timer = setInterval(goToNextSlide, slideDuration);
+      setSlideTimer(timer);
+      return () => clearInterval(timer);
+    } else {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+      }
+    }
+  }, [slideShow]);
 
   return (
     <Fragment>
