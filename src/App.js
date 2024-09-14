@@ -37,6 +37,11 @@ function App() {
     setActiveIndex((prevIndex) => (prevIndex + 1) % catalogs.length);
   };
 
+  // Update teh active index for previous
+  const goToPrevSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex -1 + catalogs.length) % catalogs.length)
+  };
+
   return (
     <Fragment>
       <h8k-navbar header={title}></h8k-navbar>
@@ -48,6 +53,7 @@ function App() {
               <button
                 className="icon-only outlined"
                 data-testid="prev-slide-btn"
+                onClick={goToPrevSlide}
               >
                 <i className="material-icons">arrow_back</i>
               </button>
